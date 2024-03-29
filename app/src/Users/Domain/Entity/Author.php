@@ -17,4 +17,9 @@ class Author {
         $this->surname = $surname;
         $this->patronymic = $patronymic;
     }
+
+    public function __toString() {
+        $stringAuthor = $this->name . ' ' . $this->surname . ' ' . $this->patronymic;
+        return $stringAuthor;
+    }
 }
