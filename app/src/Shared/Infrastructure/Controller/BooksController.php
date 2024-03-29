@@ -18,7 +18,14 @@ class BooksController extends AbstractController {
     #[Route('/books', name: 'loadBooks', methods: ['GET'])]
     public function loadAction(Request $request): Response {
 
+        ob_start();
+        include $this->getParameter('kernel.project_dir') . '/templates/books.php';
+        $content = ob_get_clean();
+
         $books = $this->useBookRepository->getAllBooks();
-        return new Response(implode('\n', $books));
+
+        $content = str_replace('{{CONTENT}}', implode('\n', $books), $content);
+
+        return new Response($content);
     }
 }
