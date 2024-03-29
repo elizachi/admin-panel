@@ -17,20 +17,20 @@
             font-size: 24px;
         }
         button {
-            margin-left: auto; /* Перемещаем кнопку вправо */
+            margin-left: auto;
         }
         .form-container {
             display: flex;
-            flex-direction: column; /* Формы располагаются вертикально */
-            align-items: flex-end; /* Формы выравниваются справа */
+            flex-direction: column;
+            align-items: flex-end;
             padding: 10px;
         }
         .form-container form {
-            margin-bottom: 10px; /* Добавляем отступ между формами */
+            margin-bottom: 10px;
         }
         .form-container label {
-            text-align: right; /* Выравниваем текст метки по правому краю */
-            margin-right: 10px; /* Добавляем отступ справа от метки */
+            text-align: right;
+            margin-right: 10px;
         }
     </style>
 </head>
