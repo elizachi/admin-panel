@@ -10,15 +10,9 @@ class User {
     private string $login;
     private ?string $password = null;
 
-    /**
-     * @var array<string>
-     */
-    private array $roles = [];
-
     public function __construct(string $login, string $password) {
         $this->ulid = Ulid::generate();
-        $this->email = $login;
-
+        $this->login = $login;
         $this->password = $password;
     }
 
