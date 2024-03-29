@@ -26,7 +26,9 @@
             padding: 10px;
         }
         .form-container form {
-            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
         }
         .form-container label {
             text-align: right;
@@ -37,25 +39,23 @@
 <body>
     <div class="container">
         <h1 class="title">Список книг</h1>
-        <button>Добавить</button>
     </div>
 
     <div class="form-container">
-        <form>
+        <form action="/books" method="POST">
             <label for="title">Название:</label>
             <input type="text" id="title" name="title">
-        </form>
-        <form>
+
             <label for="publicationYear">Год публикации:</label>
             <input type="number" id="publicationYear" name="publicationYear">
-        </form>
-        <form>
+
             <label for="ISBN">ISBN:</label>
             <input type="text" id="ISBN" name="ISBN">
-        </form>
-        <form>
+
             <label for="pageCount">Количество страниц:</label>
             <input type="number" id="pageCount" name="pageCount">
+
+            <input type="submit" value="Добавить">
         </form>
     </div>
 
