@@ -15,26 +15,22 @@ class User {
      */
     private array $roles = [];
 
-    public function __construct(string $login, string $password)
-    {
+    public function __construct(string $login, string $password) {
         $this->ulid = Ulid::generate();
         $this->email = $login;
 
         $this->password = $password;
     }
 
-    public function getId(): string
-    {
+    public function getId(): string {
         return $this->ulid;
     }
 
-    public function getLogin(): string
-    {
+    public function getLogin(): string {
         return $this->login;
     }
 
-    public function getPassword(): ?string
-    {
+    public function getPassword(): ?string {
         return $this->password;
     }
 }
