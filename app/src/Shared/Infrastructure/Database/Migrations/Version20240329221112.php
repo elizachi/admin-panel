@@ -9,7 +9,7 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20240329221112 extends AbstractMigration {
     public function getDescription(): string {
-        return 'Secod migration: creating admin user';
+        return 'First migration: creating table with admin user';
     }
 
     public function up(Schema $schema): void {
