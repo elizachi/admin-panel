@@ -10,7 +10,7 @@
     <?php endif; ?>
 
     <h2>Войти</h2>
-    <form action="/" method="GET">
+    <form action="/" method="POST">
         <label for="login">Логин:</label><br>
         <input type="text" id="login" name="login"><br><br>
         

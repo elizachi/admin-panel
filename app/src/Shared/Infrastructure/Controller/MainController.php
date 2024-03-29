@@ -6,11 +6,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Cookie;
+use App\Users\Infrastructure\Repository\UserRepository;
 
 class MainController extends AbstractController {
-    #[Route('/', name: 'load')]
-    public function loadAction(Request $request): Response {
 
+    private $useUserRepository;
+
+    public function __construct(UserRepository $userRepository) {
+        $this->useUserRepository = $userRepository;
+    }
+
+    private function showData(Request $request): Response {
         if($request->cookies->has('login')) {
             ob_start();
             include $this->getParameter('kernel.project_dir') . '/templates/main/index.php';
@@ -20,17 +26,26 @@ class MainController extends AbstractController {
             include $this->getParameter('kernel.project_dir') . '/templates/main/unauthorized.php';
             $content = ob_get_clean();
         }
-
         return new Response($content);
     }
-    // #[Route('/', name: 'login', methods: ['POST'])]
-    // public function loginAction(Request $request): Response {
-    //     $login = $request->get('login');
-    //     $password = $request->get('password');
 
-    //     $response = new Response($login);
-    //     $response->headers->setCookie(new Cookie('login', $login, 0, '/'));
+    #[Route('/', name: 'load', methods: ['GET'])]
+    public function loadAction(Request $request): Response {
 
-    //     return $response;
-    // }
+        return $this->showData($request);
+    }
+
+    #[Route('/', name: 'load', methods: ['POST'])]
+    public function loginAction(Request $request): Response {
+        $login = $request->request->get('login');
+        $password = $request->request->get('password');
+
+        $user = $this->useUserRepository->findByLoginAndPassword($login, $password);
+
+        if ($user != null) {
+            setCookie(new Cookie('login', $login));
+        }
+
+        return $this->showData($request);
+    }
 }

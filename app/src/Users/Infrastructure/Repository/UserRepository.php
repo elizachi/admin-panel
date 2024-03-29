@@ -13,18 +13,7 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
         parent::__construct($registry, User::class);
     }
 
-    public function add(User $user): void {
-        $this->_em->persist($user);
-        $this->_em->flush();
-    }
-
-    public function findById(string $ulid): ?User
-    {
-        return $this->find($ulid);
-    }
-
-    public function findByLogin(string $login): ?User
-    {
-        return $this->findOneBy(['email' => $login]);
+    public function findByLoginAndPassword(string $login, string $password): ?User {
+        return $this->findOneBy(['login' => $login, 'password' => $password]);
     }
 }
