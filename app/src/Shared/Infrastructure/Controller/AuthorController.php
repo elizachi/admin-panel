@@ -18,7 +18,14 @@ class AuthorController extends AbstractController {
     #[Route('/authors', name: 'loadAuthors', methods: ['GET'])]
     public function loadAction(Request $request): Response {
 
+        ob_start();
+        include $this->getParameter('kernel.project_dir') . '/templates/authors.php';
+        $content = ob_get_clean();
+
         $authors = $this->useAuthorRepository->getAllAuthors();
-        return new Response(implode('\n', $authors));
+
+        $content = str_replace('{{CONTENT}}', implode('\n', $authors), $content);
+
+        return new Response($content);
     }
 }
