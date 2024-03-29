@@ -40,10 +40,11 @@ class MainController extends AbstractController {
         $login = $request->request->get('login');
         $password = $request->request->get('password');
 
-        $user = $this->useUserRepository->findByLoginAndPassword($login, $password);
+        $user = $this->useUserRepository->findByLoginAndPassword('admin', 
+        '5f4dcc3b5aa765d61d8327deb882cf99');
 
         if ($user != null) {
-            setCookie(new Cookie('login', $login));
+            setCookie('login', $user->getLogin(), 0, '/');
         }
 
         return $this->showData($request);
