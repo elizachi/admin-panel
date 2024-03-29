@@ -1,0 +1,21 @@
+doctrine:
+  dbal:
+    driver: pdo_mysql
+    dbname: '%env(DB_NAME)%'
+    host: '%env(DB_HOST)%'
+    port: '%env(DB_PORT)%'
+    user: '%env(DB_USER)%'
+    password: '%env(DB_PASSWORD)%'
+
+  orm:
+      auto_generate_proxy_classes: true
+      enable_lazy_ghost_objects: true
+      naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+      auto_mapping: true
+      mappings:
+          Users:
+              is_bundle: false
+              type: xml
+              dir: '%kernel.project_dir%/src/Users/Infrastructure/Database/ORM'
+              prefix: 'App\Users\Domain\Entity'
+              alias: Users
