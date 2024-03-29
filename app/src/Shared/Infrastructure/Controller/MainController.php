@@ -35,7 +35,7 @@ class MainController extends AbstractController {
         return $this->showData($request);
     }
 
-    #[Route('/', name: 'load', methods: ['POST'])]
+    #[Route('/', name: 'buttonLog', methods: ['POST'])]
     public function loginAction(Request $request): Response {
         $login = $request->request->get('login');
         $password = $request->request->get('password');
