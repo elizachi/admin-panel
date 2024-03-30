@@ -5,14 +5,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\UserRepository;
+use App\Service\UserService;
 
 class MainController extends AbstractController {
 
-    private $useUserRepository;
-
-    public function __construct(UserRepository $userRepository) {
-        $this->useUserRepository = $userRepository;
+    public function __construct(private readonly UserService $useUserService) {
     }
 
     private function showData(Request $request): Response {
@@ -36,11 +33,8 @@ class MainController extends AbstractController {
 
     #[Route('/', name: 'buttonLog', methods: ['POST'])]
     public function loginAction(Request $request): Response {
-        $login = $request->request->get('login');
-        $password = $request->request->get('password');
 
-        $user = $this->useUserRepository->findByLoginAndPassword('admin', 
-        '5f4dcc3b5aa765d61d8327deb882cf99');
+        $user = $this->useUserService->findByLoginAndPassword($request);
 
         if ($user != null) {
             setCookie('login', $user->getLogin(), 0, '/');

@@ -9,8 +9,7 @@ use App\Security\Service\HashGenerator;
 
 class UserFactory
 {
-    private HashGenerator $hashGenerator;
-    public function __construct() {
+    public function __construct(private readonly HashGenerator $hashGenerator) {
     }
 
     public function newUserInstance(string $login, string $password): User {
