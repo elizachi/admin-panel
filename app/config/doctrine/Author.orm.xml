@@ -3,14 +3,13 @@
       xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Entity\Book" table="books_book">
-        <id name="id" type="integer" column="id">
+    <entity name="App\Entity\Author" table="authors_author">
+        <id name="authorId" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
-        <field name="title" type="string"/>
-        <field name="publicationYear" type="integer"/>
-        <field name="ISBN" type="integer"/>
-        <field name="pageCount" type="integer"/>
+        <field name="name" type="string"/>
+        <field name="surname" type="string"/>
+        <field name="patronymic" type="string"/>
     </entity>
 
 </doctrine-mapping>

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 class Author {
-    private int $id;
+    private int $authorId;
     private string $name;
     private string $surname;
 

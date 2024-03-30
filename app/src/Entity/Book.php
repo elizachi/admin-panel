@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 class Book {
-    private int $id;
+    private int $bookId;
     private string $title;
     private int $publicationYear;
 
