@@ -6,7 +6,7 @@ namespace App\Users\Infrastructure\Repository;
 use App\Users\Domain\Repository\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Users\Domain\Entity\User;
+use App\Entity\User;
 
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface {
     public function __construct(ManagerRegistry $registry) {

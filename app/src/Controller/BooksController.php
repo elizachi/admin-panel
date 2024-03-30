@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Users\Infrastructure\Repository\BookRepository;
-use App\Users\Domain\Entity\Book;
+use App\Entity\Book;
 
 class BooksController extends AbstractController {
 

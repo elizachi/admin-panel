@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Users\Domain\Entity;
+namespace App\Entity;
 
 class Author {
     private int $id;

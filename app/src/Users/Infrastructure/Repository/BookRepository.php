@@ -6,7 +6,7 @@ namespace App\Users\Infrastructure\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Users\Domain\Entity\Book;
+use App\Entity\Book;
 
 class BookRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager) {

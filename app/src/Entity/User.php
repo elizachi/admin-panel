@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Users\Domain\Entity;
+namespace App\Entity;
 use Symfony\Component\Uid\Ulid;
 
 class User {
