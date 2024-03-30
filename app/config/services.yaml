@@ -26,3 +26,5 @@ services:
     App\Entity\Factory\AuthorFactory:
     App\Service\BookService:
     App\Entity\Factory\BookFactory:
+    App\Service\UserService:
+    App\Entity\Factory\UserFactory:
