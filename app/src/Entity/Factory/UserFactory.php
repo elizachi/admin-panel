@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace App\Entity\Factory;
 
 use App\Entity\User;
+use App\Security\Service\HashGenerator;
 
 class UserFactory
 {
+    private HashGenerator $hashGenerator;
     public function __construct() {
     }
 
     public function create(string $login, string $password): User {
-        /**
-         * @todo add hash password
-         */
-        $user = new User($login, $password);
+        $user = new User(
+            $login,
+            $this->hashGenerator->hash($password)
+        );
 
         return $user;
     }
