@@ -24,3 +24,5 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Service\AuthorService:
     App\Entity\Factory\AuthorFactory:
+    App\Service\BookService:
+    App\Entity\Factory\BookFactory:

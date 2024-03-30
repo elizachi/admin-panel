@@ -18,7 +18,7 @@ class BookRepository extends ServiceEntityRepository {
         return $this->findAll();
     }
 
-    public function addAuthor(Book $book): void {
+    public function addBook(Book $book): void {
         $this->_em->persist($book);
         $this->_em->flush();
     }

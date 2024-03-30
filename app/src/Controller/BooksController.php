@@ -5,15 +5,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\BookRepository;
-use App\Entity\Book;
+use App\Service\BookService;
 
 class BooksController extends AbstractController {
 
-    private $useBookRepository;
-
-    public function __construct(BookRepository $bookRepository) {
-        $this->useBookRepository = $bookRepository;
+    public function __construct(private readonly BookService $useBookService) {
     }
 
     private function showData(Request $request): Response {
@@ -21,7 +17,7 @@ class BooksController extends AbstractController {
         include $this->getParameter('kernel.project_dir') . '/templates/books.php';
         $content = ob_get_clean();
 
-        $books = $this->useBookRepository->getAllBooks();
+        $books = $this->useBookService->getAll();
 
         $result = '';
         for ($i = 0; $i < count($books); $i++) {
@@ -44,12 +40,8 @@ class BooksController extends AbstractController {
 
     #[Route('/books', name: 'buttonAdd', methods: ['POST'])]
     public function addAction(Request $request): Response {
-        $title = $request->request->get('title');
-        $publicationYear = $request->request->get('publicationYear');
-        $ISBN = $request->request->get('ISBN');
-        $pageCount = $request->request->get('pageCount');
 
-        $this -> useBookRepository->addAuthor(new Book($title, $publicationYear, $ISBN, $pageCount));
+        $this->useBookService->create($request);
 
         return $this->showData($request);
     }
