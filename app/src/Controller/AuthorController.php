@@ -5,15 +5,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\AuthorRepository;
-use App\Entity\Author;
+use App\Service\AuthorService;
 
 class AuthorController extends AbstractController {
-
-    private $useAuthorRepository;
-
-    public function __construct(AuthorRepository $authorRepository) {
-        $this->useAuthorRepository = $authorRepository;
+    public function __construct(private readonly AuthorService $useAuthorService) {
     }
 
     private function showData(Request $request): Response {
@@ -21,7 +16,7 @@ class AuthorController extends AbstractController {
         include $this->getParameter('kernel.project_dir') . '/templates/authors.php';
         $content = ob_get_clean();
 
-        $authors = $this->useAuthorRepository->getAllAuthors();
+        $authors = $this->useAuthorService->getAll();
 
         $result = '';
         for ($i = 0; $i < count($authors); $i++) {
@@ -44,11 +39,8 @@ class AuthorController extends AbstractController {
 
     #[Route('/authors', name: 'buttonAdd', methods: ['POST'])]
     public function addAction(Request $request): Response {
-        $name = $request->request->get('name');
-        $surname = $request->request->get('surname');
-        $patronymic = $request->request->get('patronymic');
 
-        $this -> useAuthorRepository->addAuthor(new Author($name, $surname, $patronymic));
+        $this->useAuthorService->create($request);
 
         return $this->showData($request);
     }
