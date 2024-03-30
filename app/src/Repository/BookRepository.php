@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Users\Infrastructure\Repository;
+namespace App\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
