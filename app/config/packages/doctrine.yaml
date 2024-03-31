@@ -16,6 +16,6 @@ doctrine:
           Users:
               is_bundle: false
               type: xml
-              dir: '%kernel.project_dir%/src/Users/Infrastructure/Database/ORM'
+              dir: '%kernel.project_dir%/config/doctrine'
               prefix: 'App\Entity'
               alias: Users

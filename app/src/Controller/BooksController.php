@@ -5,52 +5,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Users\Infrastructure\Repository\BookRepository;
-use App\Entity\Book;
+use App\Service\BookService;
 
-class BooksController extends AbstractController {
-
-    private $useBookRepository;
-
-    public function __construct(BookRepository $bookRepository) {
-        $this->useBookRepository = $bookRepository;
-    }
-
-    private function showData(Request $request): Response {
-        ob_start();
-        include $this->getParameter('kernel.project_dir') . '/templates/books.php';
-        $content = ob_get_clean();
-
-        $books = $this->useBookRepository->getAllBooks();
-
-        $result = '';
-        for ($i = 0; $i < count($books); $i++) {
-            $result .= $books[$i];
-            if ($i < count($books) - 1) {
-                $result .= "\n";
-            }
-        }
-
-        $content = str_replace('{{CONTENT}}', $result, $content);
-
-        return new Response($content);
+class BooksController extends AbstractController
+{
+    public function __construct(private readonly BookService $useBookService)
+    {
     }
 
     #[Route('/books', name: 'loadBooks', methods: ['GET'])]
-    public function loadAction(Request $request): Response {
+    public function loadAction(Request $request): Response
+    {
+        $books = $this->useBookService->getAll();
 
-        return $this->showData($request);
+        return $this->render('books.html.twig', [
+            'books' => $books,
+        ]);
     }
 
-    #[Route('/books', name: 'buttonAdd', methods: ['POST'])]
-    public function addAction(Request $request): Response {
-        $title = $request->request->get('title');
-        $publicationYear = $request->request->get('publicationYear');
-        $ISBN = $request->request->get('ISBN');
-        $pageCount = $request->request->get('pageCount');
+    #[Route('/books', name: 'addBook', methods: ['POST'])]
+    public function addAction(Request $request): Response
+    {
+        $this->useBookService->create($request);
+        return new Response('Book was created successfully', Response::HTTP_OK);
+    }
 
-        $this -> useBookRepository->addAuthor(new Book($title, $publicationYear, $ISBN, $pageCount));
-
-        return $this->showData($request);
+    #[Route('/books/{id}', name: 'deleteBook', methods: ['DELETE'])]
+    public function deleteAction(Request $request): Response
+    {
+        $this->useBookService->delete($request);
+        return new Response('Book was deleted successfully', Response::HTTP_OK);
     }
 }

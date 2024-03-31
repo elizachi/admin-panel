@@ -6,18 +6,17 @@ namespace App\Entity;
 use Symfony\Component\Uid\Ulid;
 
 class User {
-    private string $ulid;
+    private int $userId;
     private string $login;
     private ?string $password = null;
 
     public function __construct(string $login, string $password) {
-        $this->ulid = Ulid::generate();
         $this->login = $login;
         $this->password = $password;
     }
 
-    public function getId(): string {
-        return $this->ulid;
+    public function getId(): int {
+        return $this->userId;
     }
 
     public function getLogin(): string {

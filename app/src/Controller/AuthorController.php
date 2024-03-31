@@ -5,51 +5,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Users\Infrastructure\Repository\AuthorRepository;
-use App\Entity\Author;
+use App\Service\AuthorService;
 
-class AuthorController extends AbstractController {
-
-    private $useAuthorRepository;
-
-    public function __construct(AuthorRepository $authorRepository) {
-        $this->useAuthorRepository = $authorRepository;
-    }
-
-    private function showData(Request $request): Response {
-        ob_start();
-        include $this->getParameter('kernel.project_dir') . '/templates/authors.php';
-        $content = ob_get_clean();
-
-        $authors = $this->useAuthorRepository->getAllAuthors();
-
-        $result = '';
-        for ($i = 0; $i < count($authors); $i++) {
-            $result .= $authors[$i];
-            if ($i < count($authors) - 1) {
-                $result .= "\n";
-            }
-        }
-
-        $content = str_replace('{{CONTENT}}', $result, $content);
-
-        return new Response($content);
+class AuthorController extends AbstractController
+{
+    public function __construct(private readonly AuthorService $useAuthorService)
+    {
     }
     
     #[Route('/authors', name: 'loadAuthors', methods: ['GET'])]
-    public function loadAction(Request $request): Response {
-        
-        return $this->showData($request);
+    public function loadAction(Request $request): Response
+    {
+        $authors = $this->useAuthorService->getAll();
+
+        return $this->render('authors.html.twig', [
+            'authors' => $authors,
+        ]);
     }
 
-    #[Route('/authors', name: 'buttonAdd', methods: ['POST'])]
-    public function addAction(Request $request): Response {
-        $name = $request->request->get('name');
-        $surname = $request->request->get('surname');
-        $patronymic = $request->request->get('patronymic');
+    #[Route('/authors', name: 'addAuthor', methods: ['POST'])]
+    public function addAction(Request $request): Response
+    {
+        $this->useAuthorService->create($request);
+        return new Response('Author was created successfully', Response::HTTP_OK);
+    }
 
-        $this -> useAuthorRepository->addAuthor(new Author($name, $surname, $patronymic));
-
-        return $this->showData($request);
+    #[Route('/authors/{id}', name: 'deleteAuthor', methods: ['DELETE'])]
+    public function deleteAction(Request $request): Response
+    {
+        $this->useAuthorService->delete($request);
+        return new Response('Author was deleted successfully', Response::HTTP_OK);
     }
 }

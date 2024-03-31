@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 class Author {
-    private int $id;
+    private int $authorId;
     private string $name;
     private string $surname;
 
@@ -21,5 +21,13 @@ class Author {
     public function __toString() {
         $stringAuthor = $this->name . ' ' . $this->surname . ' ' . $this->patronymic;
         return $stringAuthor;
+    }
+
+    public function getId(): int {
+        return $this->authorId;
+    }
+
+    public function getName(): string {
+        return $this->name;
     }
 }

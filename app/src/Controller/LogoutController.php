@@ -5,9 +5,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class LoginController extends AbstractController {
-    #[Route('/login', name: 'login', methods: ['GET'])]
+class LogoutController extends AbstractController {
+    #[Route('/logout', name: 'logot', methods: ['POST'])]
     public function login(): Response {
-        return $this->render('login.html.twig');
+        setCookie('login', '', time() - 3600, '/');
+        return new Response('User successfully logout');
     }
 }
