@@ -9,12 +9,12 @@ class Book {
     private string $title;
     private int $publicationYear;
 
-    private int $ISBN;
+    private string $ISBN;
 
     private int $pageCount;
 
     public function __construct(
-        string $title, int $publicationYear, int $ISBN, int $pageCount) {
+        string $title, int $publicationYear, string $ISBN, int $pageCount) {
         $this->title = $title;
         $this->publicationYear = $publicationYear;
         $this->ISBN = $ISBN;
@@ -33,7 +33,7 @@ class Book {
         return $this->title;
     }
 
-    public function getISBN(): int {
+    public function getISBN(): string {
         return $this->ISBN;
     }
 

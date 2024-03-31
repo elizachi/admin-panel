@@ -9,7 +9,7 @@
         </id>
         <field name="title" type="string"/>
         <field name="publicationYear" type="integer"/>
-        <field name="ISBN" type="integer"/>
+        <field name="ISBN" type="string"/>
         <field name="pageCount" type="integer"/>
     </entity>
 
