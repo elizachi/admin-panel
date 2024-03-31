@@ -40,7 +40,7 @@ class BooksController extends AbstractController
         return $this->showData($request);
     }
 
-    #[Route('/books', name: 'buttonAdd', methods: ['POST'])]
+    #[Route('/books', name: 'addBook', methods: ['POST'])]
     public function addAction(Request $request): Response
     {
         $this->useBookService->create($request);

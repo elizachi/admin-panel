@@ -42,7 +42,7 @@ class AuthorController extends AbstractController
         return $this->showData($request);
     }
 
-    #[Route('/authors', name: 'buttonAdd', methods: ['POST'])]
+    #[Route('/authors', name: 'addAuthor', methods: ['POST'])]
     public function addAction(Request $request): Response
     {
         $this->useAuthorService->create($request);
