@@ -30,6 +30,6 @@ class AuthorService extends AbstractServiceConfigurator
     public function delete(Request $request)
     {
         $id = $request->attributes->get('id');
-        $this->useAuthorRepository->delete($id);
+        $this->useAuthorRepository->removeAuthor($id);
     }
 }
