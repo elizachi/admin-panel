@@ -49,7 +49,7 @@ class AuthorController extends AbstractController
         return $this->showData($request);
     }
 
-    #[Route('/authors', name: 'deleteAuthor', methods: ['DELETE'])]
+    #[Route('/authors/{id}', name: 'deleteAuthor', methods: ['DELETE'])]
     public function deleteAction(Request $request): Response
     {
         $this->useAuthorService->delete($request);
