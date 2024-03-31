@@ -30,4 +30,12 @@ class Author {
     public function getName(): string {
         return $this->name;
     }
+
+    public function getSurname(): string {
+        return $this->surname;
+    }
+
+    public function getPatronymic(): string {
+        return $this->patronymic;
+    }
 }

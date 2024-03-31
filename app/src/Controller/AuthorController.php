@@ -26,14 +26,12 @@ class AuthorController extends AbstractController
     #[Route('/authors', name: 'addAuthor', methods: ['POST'])]
     public function addAction(Request $request): Response
     {
-        $this->useAuthorService->create($request);
-        return new Response('Author was created successfully', Response::HTTP_OK);
+        return $this->useAuthorService->create($request);
     }
 
     #[Route('/authors/{id}', name: 'deleteAuthor', methods: ['DELETE'])]
     public function deleteAction(Request $request): Response
     {
-        $this->useAuthorService->delete($request);
-        return new Response('Author was deleted successfully', Response::HTTP_OK);
+        return $this->useAuthorService->delete($request);
     }
 }
