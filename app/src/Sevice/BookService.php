@@ -21,10 +21,10 @@ class BookService extends AbstractServiceConfigurator
         $ISBN = $request->request->get('ISBN');
         $pageCount = $request->request->get('pageCount');
 
-        if(!($this->isValidISBN($ISBN))) {
-            return new Response('Wrong ISBN', Response::HTTP_BAD_REQUEST);
-        } else if(!($this->isValidYear($publicationYear))) {
+        if(!($this->isValidYear($publicationYear))) {
             return new Response('Wrong publication year', Response::HTTP_BAD_REQUEST);
+        } else if(!($this->isValidISBN($ISBN))) {
+            return new Response('Wrong ISBN', Response::HTTP_BAD_REQUEST);
         } else if(!($this->isValidPageCount($pageCount))) {
             return new Response('Wrong page count', Response::HTTP_BAD_REQUEST);
         }
