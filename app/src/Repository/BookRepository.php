@@ -21,10 +21,21 @@ class BookRepository extends ServiceEntityRepository
         return $this->findAll();
     }
 
-    public function addBook(Book $book): void
+    public function addBook(Book $book): Book
     {
         $this->_em->persist($book);
         $this->_em->flush();
+
+        /**
+         * Check that book has been added
+         */
+        $addedBook = $this->getBookById($book->getId());
+
+        if( $addedBook ) {
+            return $addedBook;
+        } else {
+            throw new \Exception("Book not added");
+        }
     }
 
     public function removeBook(int $id): void

@@ -5,6 +5,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceCon
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\BookRepository;
 use App\Entity\Factory\BookFactory;
+use App\Entity\Book;
 
 class BookService extends AbstractServiceConfigurator
 {
@@ -12,7 +13,7 @@ class BookService extends AbstractServiceConfigurator
     {
     }
 
-    public function create(Request $request)
+    public function create(Request $request): Book
     {
         $title = $request->request->get('title');
         $publicationYear = $request->request->get('publicationYear');
@@ -21,7 +22,7 @@ class BookService extends AbstractServiceConfigurator
 
         $book = $this->bookFactory->newBookInstance($title, $publicationYear, $ISBN, $pageCount);
 
-        $this->useBookRepository->addBook($book);
+        return $this->useBookRepository->addBook($book);
     }
 
     public function getAll(): array
@@ -29,7 +30,7 @@ class BookService extends AbstractServiceConfigurator
         return $this->useBookRepository->getAllBooks();
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request): void
     {
         $id = $request->attributes->get('id');
         $this->useBookRepository->removeBook($id);
