@@ -9,10 +9,12 @@ use App\Security\Service\HashGenerator;
 
 class UserFactory
 {
-    public function __construct(private readonly HashGenerator $hashGenerator) {
+    public function __construct(private readonly HashGenerator $hashGenerator)
+    {
     }
 
-    public function newUserInstance(string $login, string $password): User {
+    public function newUserInstance(string $login, string $password): User
+    {
         $user = new User(
             $login,
             $this->hashGenerator->hash($password)

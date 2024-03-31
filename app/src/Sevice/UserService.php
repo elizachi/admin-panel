@@ -9,10 +9,12 @@ use App\Entity\User;
 
 class UserService extends AbstractServiceConfigurator {
 
-    public function __construct(private UserFactory $userFactory, private UserRepository $useUserRepository) {
+    public function __construct(private UserFactory $userFactory, private UserRepository $useUserRepository)
+    {
     }
 
-    public function findByLoginAndPassword(Request $request): ?User {
+    public function findByLoginAndPassword(Request $request): ?User
+    {
         $login = $request->request->get('login');
         $password = $request->request->get('password');
 

@@ -6,10 +6,12 @@ namespace App\Security\Service;
 
 class HashGenerator
 {
-    public function __construct() {
+    public function __construct()
+    {
     }
 
-    public function hash(string $password): string {
+    public function hash(string $password): string
+    {
         return md5($password);
     }
 }

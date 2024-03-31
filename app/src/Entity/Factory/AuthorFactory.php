@@ -8,10 +8,12 @@ use App\Entity\Author;
 
 class AuthorFactory
 {
-    public function __construct() {
+    public function __construct()
+    {
     }
 
-    public function newAuthorInstance(string $name, string $surname, string $patronymic): Author {
+    public function newAuthorInstance(string $name, string $surname, string $patronymic): Author
+    {
         $author = new Author(
             $name,
             $surname,

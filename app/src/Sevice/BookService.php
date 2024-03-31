@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\BookRepository;
 use App\Entity\Factory\BookFactory;
-use App\Entity\Book;
 
 class BookService extends AbstractServiceConfigurator
 {

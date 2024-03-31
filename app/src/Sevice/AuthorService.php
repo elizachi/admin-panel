@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\AuthorRepository;
 use App\Entity\Factory\AuthorFactory;
-use App\Entity\Author;
 
 class AuthorService extends AbstractServiceConfigurator
 {

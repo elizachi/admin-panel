@@ -8,10 +8,12 @@ use App\Entity\Book;
 
 class BookFactory
 {
-    public function __construct() {
+    public function __construct()
+    {
     }
 
-    public function newBookInstance(string $title, int $publicationYear, int $ISBN, int $pageCount): Book {
+    public function newBookInstance(string $title, int $publicationYear, string $ISBN, int $pageCount): Book
+    {
         $author = new Book(
             $title,
             $publicationYear,
