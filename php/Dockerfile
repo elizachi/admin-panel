@@ -17,3 +17,5 @@ COPY --from=composer:stable /usr/bin/composer /usr/bin/composer
 
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+
+RUN wget https://raw.githubusercontent.com/yoanbernabeu/Symfony-And-Docker-Makefile-Taskfile/main/Makefile
