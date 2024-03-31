@@ -32,4 +32,12 @@ class Book {
     public function getTitle(): string {
         return $this->title;
     }
+
+    public function getISBN(): int {
+        return $this->ISBN;
+    }
+
+    public function getPublicationYear(): int {
+        return $this->publicationYear;
+    }
 }

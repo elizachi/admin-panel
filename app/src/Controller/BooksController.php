@@ -26,14 +26,12 @@ class BooksController extends AbstractController
     #[Route('/books', name: 'addBook', methods: ['POST'])]
     public function addAction(Request $request): Response
     {
-        $this->useBookService->create($request);
-        return new Response('Book was created successfully', Response::HTTP_OK);
+        return $this->useBookService->create($request);
     }
 
     #[Route('/books/{id}', name: 'deleteBook', methods: ['DELETE'])]
     public function deleteAction(Request $request): Response
     {
-        $this->useBookService->delete($request);
-        return new Response('Book was deleted successfully', Response::HTTP_OK);
+        return $this->useBookService->delete($request);
     }
 }
