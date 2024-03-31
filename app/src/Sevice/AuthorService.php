@@ -5,13 +5,14 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceCon
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\AuthorRepository;
 use App\Entity\Factory\AuthorFactory;
+use App\Entity\Author;
 
 class AuthorService extends AbstractServiceConfigurator
 {
     public function __construct(private AuthorFactory $authorFactory, private AuthorRepository $useAuthorRepository) {
     }
 
-    public function create(Request $request)
+    public function create(Request $request): Author
     {
         $name = $request->request->get('name');
         $surname = $request->request->get('surname');
@@ -19,7 +20,7 @@ class AuthorService extends AbstractServiceConfigurator
 
         $author = $this->authorFactory->newAuthorInstance($name, $surname, $patronymic);
 
-        $this->useAuthorRepository->addAuthor($author);
+        return $this->useAuthorRepository->addAuthor($author);
     }
 
     public function getAll(): array

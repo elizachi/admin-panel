@@ -23,7 +23,11 @@ class Author {
         return $stringAuthor;
     }
 
-    public function getAuthorId(): int {
+    public function getId(): int {
         return $this->authorId;
+    }
+
+    public function getName(): string {
+        return $this->name;
     }
 }

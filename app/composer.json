@@ -14,8 +14,10 @@
         "symfony/framework-bundle": "6.4.*",
         "symfony/orm-pack": "*",
         "symfony/runtime": "6.4.*",
+        "symfony/twig-bundle": "^6.4",
         "symfony/uid": "^6.4",
-        "symfony/yaml": "6.4.*"
+        "symfony/yaml": "6.4.*",
+        "twig/twig": "^3.8"
     },
     "config": {
         "allow-plugins": {

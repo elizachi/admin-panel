@@ -21,10 +21,21 @@ class AuthorRepository extends ServiceEntityRepository
         return $this->findAll();
     }
 
-    public function addAuthor(Author $author): void
+    public function addAuthor(Author $author): Author
     {
         $this->_em->persist($author);
         $this->_em->flush();
+
+        /**
+         * Check that author has been added
+         */
+        $addedAuthor = $this->getAuthorById($author->getId());
+
+        if( $addedAuthor ) {
+            return $addedAuthor;
+        } else {
+            throw new \Exception("Author not added");
+        }
     }
 
     public function removeAuthor(int $id): void
@@ -34,7 +45,7 @@ class AuthorRepository extends ServiceEntityRepository
          */
         $existedAuthor = $this->getAuthorById($id);
 
-        if ($existedAuthor) {
+        if ( $existedAuthor ) {
             $this->_em->remove($existedAuthor);
             $this->_em->flush();
         } else {
