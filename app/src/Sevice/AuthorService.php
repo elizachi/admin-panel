@@ -28,7 +28,7 @@ class AuthorService extends AbstractServiceConfigurator
         return $this->useAuthorRepository->getAllAuthors();
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request): void
     {
         $id = $request->attributes->get('id');
         $this->useAuthorRepository->removeAuthor($id);
