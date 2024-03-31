@@ -6,12 +6,13 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\AuthorRepository;
 use App\Entity\Factory\AuthorFactory;
 
-class AuthorService extends AbstractServiceConfigurator {
-
+class AuthorService extends AbstractServiceConfigurator
+{
     public function __construct(private AuthorFactory $authorFactory, private AuthorRepository $useAuthorRepository) {
     }
 
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
         $name = $request->request->get('name');
         $surname = $request->request->get('surname');
         $patronymic = $request->request->get('patronymic');
@@ -21,8 +22,14 @@ class AuthorService extends AbstractServiceConfigurator {
         $this->useAuthorRepository->addAuthor($author);
     }
 
-    public function getAll(): array {
-
+    public function getAll(): array
+    {
         return $this->useAuthorRepository->getAllAuthors();
+    }
+
+    public function delete(Request $request)
+    {
+        $id = $request->attributes->get('id');
+        $this->useAuthorRepository->delete($id);
     }
 }

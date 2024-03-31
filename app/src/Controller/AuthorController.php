@@ -7,11 +7,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\AuthorService;
 
-class AuthorController extends AbstractController {
-    public function __construct(private readonly AuthorService $useAuthorService) {
+class AuthorController extends AbstractController
+{
+    public function __construct(private readonly AuthorService $useAuthorService)
+    {
     }
 
-    private function showData(Request $request): Response {
+    private function showData(Request $request): Response
+    {
         ob_start();
         include $this->getParameter('kernel.project_dir') . '/templates/authors.php';
         $content = ob_get_clean();
@@ -19,9 +22,11 @@ class AuthorController extends AbstractController {
         $authors = $this->useAuthorService->getAll();
 
         $result = '';
-        for ($i = 0; $i < count($authors); $i++) {
+        for ($i = 0; $i < count($authors); $i++)
+        {
             $result .= $authors[$i];
-            if ($i < count($authors) - 1) {
+            if ($i < count($authors) - 1)
+            {
                 $result .= "\n";
             }
         }
@@ -32,16 +37,22 @@ class AuthorController extends AbstractController {
     }
     
     #[Route('/authors', name: 'loadAuthors', methods: ['GET'])]
-    public function loadAction(Request $request): Response {
-        
+    public function loadAction(Request $request): Response
+    {
         return $this->showData($request);
     }
 
     #[Route('/authors', name: 'buttonAdd', methods: ['POST'])]
-    public function addAction(Request $request): Response {
-
+    public function addAction(Request $request): Response
+    {
         $this->useAuthorService->create($request);
+        return $this->showData($request);
+    }
 
+    #[Route('/authors', name: 'deleteAuthor', methods: ['DELETE'])]
+    public function deleteAction(Request $request): Response
+    {
+        $this->useAuthorService->delete($request);
         return $this->showData($request);
     }
 }

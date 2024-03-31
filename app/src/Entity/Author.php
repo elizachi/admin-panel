@@ -22,4 +22,8 @@ class Author {
         $stringAuthor = $this->name . ' ' . $this->surname . ' ' . $this->patronymic;
         return $stringAuthor;
     }
+
+    public function getAuthorId(): int {
+        return $this->authorId;
+    }
 }
