@@ -17,7 +17,8 @@ class MainController extends AbstractController
     #[Route('/', name: 'load', methods: ['GET'])]
     public function loadAction(Request $request): Response
     {
-        if($request->cookies->has('login')) {
+        if($request->cookies->has('login'))
+        {
             return $this->render('main/index.html.twig');
         } else {
             return $this->render('main/unauthorized.html.twig');
@@ -29,11 +30,12 @@ class MainController extends AbstractController
     {
         $user = $this->useUserService->findByLoginAndPassword($request);
 
-        if ($user != null) {
+        if ($user != null)
+        {
             setCookie('login', $user->getLogin(), 0, '/');
             return new Response('User successfully authorized', Response::HTTP_OK);
         }
 
-        return new Response('Please, ry again', Response::HTTP_BAD_REQUEST);
+        return new Response('Invalid login or password, please, try again.', Response::HTTP_BAD_REQUEST);
     }
 }
