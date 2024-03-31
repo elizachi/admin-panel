@@ -3,7 +3,7 @@
 ### How to run project
 After copying the repository, run follow command
 ```
-docker compose up
+make start
 ```
 The default project address is http://localhost:8080/
 
